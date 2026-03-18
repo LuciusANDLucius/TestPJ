@@ -94,28 +94,45 @@
         tools:layout_editor_absoluteY="446dp" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/id_google"
         android:layout_width="60dp"
-        android:layout_height="59dp"
+        android:layout_height="60dp"
+        android:src="@drawable/icon_google"
+
+        android:background="@android:color/transparent"
+        android:padding="0dp"
+
+        android:scaleType="fitCenter"
+
         tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="556dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:layout_editor_absoluteY="556dp" />
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="56dp"
-        android:layout_height="62dp"
         tools:layout_editor_absoluteX="179dp"
         tools:layout_editor_absoluteY="556dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/icon_meta"
+
+        android:background="@android:color/transparent"
+        android:padding="0dp"
+
+        android:scaleType="fitCenter"/>
 
     <ImageButton
         android:id="@+id/imageButton3"
-        android:layout_width="61dp"
-        android:layout_height="63dp"
+
         tools:layout_editor_absoluteX="254dp"
         tools:layout_editor_absoluteY="556dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/icon_Zalo"
+
+        android:background="@android:color/transparent"
+        android:padding="0dp"
+
+        android:scaleType="fitCenter" />
 
     <TextView
         android:id="@+id/textView"
@@ -125,6 +142,24 @@
         android:textStyle="bold"
         tools:layout_editor_absoluteX="168dp"
         tools:layout_editor_absoluteY="512dp" />
+
+    <Button
+        android:id="@+id/button5"
+
+        android:layout_width="214dp"
+        android:layout_height="40dp"
+        android:text="Login as guess"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:backgroundTint="@color/white"
+
+        app:cornerRadius="20dp"
+
+        app:strokeColor="#9C27B0"
+
+        app:strokeWidth="2dp"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="642dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
