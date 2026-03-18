@@ -144,7 +144,7 @@
         tools:layout_editor_absoluteY="512dp" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btn_GuessLogin"
 
         android:layout_width="214dp"
         android:layout_height="40dp"
