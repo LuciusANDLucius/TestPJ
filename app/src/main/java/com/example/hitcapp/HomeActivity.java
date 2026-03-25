@@ -24,10 +24,10 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button guessBtn1 = findViewById(R.id.Backtomain);
+        Button backtomain = findViewById(R.id.Backtomain);
 
 
-        guessBtn1.setOnClickListener(new View.OnClickListener()
+        backtomain.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
