@@ -1,9 +1,10 @@
 package com.example.hitcapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,24 +12,25 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class HomeActivity extends AppCompatActivity {
+public class Setting extends AppCompatActivity {
+
+    private static String[] items = {"Cau hinh","Tai khoan","Che do giao dien","Thong tin phien ban"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_setting);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        Button backtomain = findViewById(R.id.Backtomain);
-        Button setting = findViewById(R.id.btnSetting);
 
-        backtomain.setOnClickListener(new View.OnClickListener()
-        {
+        TextView backtohome = findViewById(R.id.backtohome);
+
+        backtohome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -36,14 +38,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, Setting.class);
-                startActivity(intent);
-            }
+        ListView listView = findViewById(R.id.myList);
 
-        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,android.R.layout.simple_list_item_1,items
+        );
 
+
+
+
+    listView.setAdapter(adapter);
     }
 }
