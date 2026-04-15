@@ -14,7 +14,19 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Setting extends AppCompatActivity {
 
-    private static String[] items = {"Cau hinh","Tai khoan","Che do giao dien","Thong tin phien ban"};
+    private static String[] items = new String[]{
+            "Cấu hình hệ thống",
+            "Quản lý tài khoản",
+            "Chế độ giao diện (Sáng/Tối)",
+            "Thông báo & Âm thanh",
+            "Quyền riêng tư & Bảo mật",
+            "Ngôn ngữ ứng dụng",
+            "Dung lượng & Dữ liệu",
+            "Trợ giúp & Hỗ trợ",
+            "Điều khoản dịch vụ",
+            "Thông tin phiên bản",
+            "Đăng xuất"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
