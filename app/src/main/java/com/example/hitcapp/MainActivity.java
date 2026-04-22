@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
                         it.putExtra("IS_GUEST", false);
                         startActivity(it);
                     }
-                else {
+                else
                         android.widget.Toast.makeText(MainActivity.this, "Invalid credentials!", android.widget.Toast.LENGTH_SHORT).show();
                 }
 
-            };
+
         });
     }
 }

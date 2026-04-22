@@ -21,14 +21,14 @@ public class CartActivity extends AppCompatActivity {
         ListView lvCart = findViewById(R.id.lvCart);
         TextView tvTotal = findViewById(R.id.tvTotal);
         
-        // Get items from CartManager
+
         List<Product> cartItems = CartManager.getInstance().getCartItems();
         
-        // Use the same ProductAdapter
+
         ProductAdapter adapter = new ProductAdapter(this, cartItems);
         lvCart.setAdapter(adapter);
 
-        // Update total price
+
         double total = CartManager.getInstance().getTotalPrice();
         tvTotal.setText("$" + String.format("%.2f", total));
 
