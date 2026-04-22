@@ -19,7 +19,20 @@ public class CartManager {
     }
 
     public void addProduct(Product product) {
+        // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+        for (Product item : cartItems) {
+            if (item.getName().equals(product.getName())) {
+                item.setQuantity(item.getQuantity() + 1);
+                return;
+            }
+        }
         cartItems.add(product);
+    }
+
+    public void removeProduct(int position) {
+        if (position >= 0 && position < cartItems.size()) {
+            cartItems.remove(position);
+        }
     }
 
     public List<Product> getCartItems() {
@@ -29,10 +42,10 @@ public class CartManager {
     public double getTotalPrice() {
         double total = 0;
         for (Product item : cartItems) {
-            // Remove '$' and parse double
             String priceStr = item.getPrice().replace("$", "").replace(",", "");
             try {
-                total += Double.parseDouble(priceStr);
+                double unitPrice = Double.parseDouble(priceStr);
+                total += unitPrice * item.getQuantity();
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }

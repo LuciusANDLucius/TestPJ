@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import java.util.List;
 
 public class ProductAdapter extends ArrayAdapter<Product> {
@@ -30,10 +31,20 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         ImageView img = convertView.findViewById(R.id.imgProduct);
         TextView name = convertView.findViewById(R.id.tvProductName);
         TextView price = convertView.findViewById(R.id.tvProductPrice);
+        ImageView btnAddFast = convertView.findViewById(R.id.btnAddToCartFast);
 
         img.setImageResource(product.getImageResource());
         name.setText(product.getName());
         price.setText(product.getPrice());
+
+        // Xử lý nút thêm nhanh vào giỏ hàng ngay trên thẻ sản phẩm
+        btnAddFast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CartManager.getInstance().addProduct(product);
+                Toast.makeText(context, "Added " + product.getName() + " to cart!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return convertView;
     }

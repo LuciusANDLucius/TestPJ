@@ -12,31 +12,54 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import java.util.List;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements CartAdapter.OnCartChangedListener {
+
+    private TextView tvTotal;
+    private CartAdapter adapter;
+    private List<Product> cartItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
         ListView lvCart = view.findViewById(R.id.lvCart);
-        TextView tvTotal = view.findViewById(R.id.tvTotal);
+        tvTotal = view.findViewById(R.id.tvTotal);
         
-        List<Product> cartItems = CartManager.getInstance().getCartItems();
-        ProductAdapter adapter = new ProductAdapter(getContext(), cartItems);
+        cartItems = CartManager.getInstance().getCartItems();
+        adapter = new CartAdapter(getContext(), cartItems, this);
         lvCart.setAdapter(adapter);
 
-        double total = CartManager.getInstance().getTotalPrice();
-        tvTotal.setText("$" + String.format("%.2f", total));
+        updateTotal();
 
         Button btnCheckout = view.findViewById(R.id.btnCheckout);
         btnCheckout.setOnClickListener(v -> {
+            boolean isGuest = false;
+            if (getActivity() != null && getActivity().getIntent() != null) {
+                isGuest = getActivity().getIntent().getBooleanExtra("IS_GUEST", false);
+            }
+
             if (cartItems.isEmpty()) {
                 Toast.makeText(getContext(), "Your cart is empty!", Toast.LENGTH_SHORT).show();
+            } else if (isGuest) {
+                Toast.makeText(getContext(), "Please login to proceed to payment!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             } else {
                 startActivity(new Intent(getActivity(), PaymentActivity.class));
             }
         });
 
         return view;
+    }
+
+    private void updateTotal() {
+        double total = CartManager.getInstance().getTotalPrice();
+        tvTotal.setText("$" + String.format("%.2f", total));
+    }
+
+    @Override
+    public void onCartChanged() {
+        updateTotal();
     }
 }
