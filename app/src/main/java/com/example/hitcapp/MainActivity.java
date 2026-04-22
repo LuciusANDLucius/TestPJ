@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                intent.putExtra("USER_EMAIL", "Guest User");
+                intent.putExtra("IS_GUEST", true);
                 startActivity(intent);
             }
         });
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
@@ -61,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
                 String sPassword = objPassword.getText().toString();
 
                     if(sEmail.equals("email@alo.co") && sPassword.equals("1234")) {
-                        Intent it = new Intent(getApplicationContext(), HomeActivity.class);
+                        Intent it = new Intent(MainActivity.this, HomeActivity.class);
+                        it.putExtra("USER_EMAIL", sEmail);
+                        it.putExtra("IS_GUEST", false);
                         startActivity(it);
                     }
                 else {
