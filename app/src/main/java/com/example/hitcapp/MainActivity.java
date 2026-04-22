@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         Button guessBtn1 = findViewById(R.id.guest);
         Button register = findViewById(R.id.register);
         Button login = findViewById(R.id.login);
+        Button forgot = findViewById(R.id.forgot);
 
 
         guessBtn1.setOnClickListener(new View.OnClickListener()
@@ -51,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
                 public void onClick(View v) {
@@ -61,16 +71,16 @@ public class MainActivity extends AppCompatActivity {
                 String sPassword = objPassword.getText().toString();
 
                     if(sEmail.equals("email@alo.co") && sPassword.equals("1234")) {
-                        Intent it = new Intent(MainActivity.this, HomeActivity.class);
+                        Intent it = new Intent(getApplicationContext(), HomeActivity.class);
                         it.putExtra("USER_EMAIL", sEmail);
                         it.putExtra("IS_GUEST", false);
                         startActivity(it);
                     }
-                else
+                else {
                         android.widget.Toast.makeText(MainActivity.this, "Invalid credentials!", android.widget.Toast.LENGTH_SHORT).show();
                 }
 
-
+            };
         });
     }
 }
