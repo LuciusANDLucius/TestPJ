@@ -2,75 +2,84 @@ package com.example.hitcapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.hitcapp.managers.SessionManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText etEmail, etPassword;
+    private Button btnLogin, btnRegister, btnGuest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        etEmail = findViewById(R.id.email);
+        etPassword = findViewById(R.id.password);
+        btnLogin = findViewById(R.id.login);
+        btnRegister = findViewById(R.id.register);
+        btnGuest = findViewById(R.id.guest);
+
+        btnLogin.setOnClickListener(v -> loginUser());
+        btnRegister.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, RegisterActivity.class)));
+        btnGuest.setOnClickListener(v -> {
+            SessionManager.clear();
+            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+            finish();
         });
+    }
 
+    private void loginUser() {
+        String email = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
 
-        Button guessBtn1 = findViewById(R.id.guest);
-        Button register = findViewById(R.id.register);
-        Button login = findViewById(R.id.login);
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        String url = "http://10.180.6.181:8080/user/login";
 
-        guessBtn1.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                intent.putExtra("USER_EMAIL", "Guest User");
-                intent.putExtra("IS_GUEST", true);
-                startActivity(intent);
-            }
-        });
+        JSONObject loginData = new JSONObject();
+        try {
+            loginData.put("emailId", email);
+            loginData.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        register.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-                public void onClick(View v) {
-                EditText objEmail = findViewById(R.id.email);
-                String sEmail = objEmail.getText().toString();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, loginData,
+                response -> {
+                    try {
+                        SessionManager.userId = response.getInt("id");
+                        SessionManager.email = response.getString("emailId");
+                        SessionManager.password = password;
+                        SessionManager.userName = response.optString("userName", "User");
 
-                EditText objPassword = findViewById(R.id.password);
-                String sPassword = objPassword.getText().toString();
-
-                    if(sEmail.equals("email@alo.co") && sPassword.equals("1234")) {
-                        Intent it = new Intent(MainActivity.this, HomeActivity.class);
-                        it.putExtra("USER_EMAIL", sEmail);
-                        it.putExtra("IS_GUEST", false);
-                        startActivity(it);
+                        Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                        finish();
+                    } catch (JSONException e) {
+                        Toast.makeText(MainActivity.this, "Error parsing server data", Toast.LENGTH_SHORT).show();
                     }
-                else
-                        android.widget.Toast.makeText(MainActivity.this, "Invalid credentials!", android.widget.Toast.LENGTH_SHORT).show();
-                }
+                },
+                error -> Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show()
+        );
 
-
-        });
+        Volley.newRequestQueue(this).add(request);
     }
 }

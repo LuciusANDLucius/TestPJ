@@ -1,5 +1,6 @@
 package com.example.hitcapp;
 
+import com.example.hitcapp.models.Product;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +30,7 @@ public class CartManager {
     public double getTotalPrice() {
         double total = 0;
         for (Product item : cartItems) {
-            // Remove '$' and parse double
-            String priceStr = item.getPrice().replace("$", "").replace(",", "");
-            try {
-                total += Double.parseDouble(priceStr);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
+            total += item.getPrice();
         }
         return total;
     }

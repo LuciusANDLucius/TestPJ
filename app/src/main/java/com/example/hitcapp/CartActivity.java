@@ -9,6 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.hitcapp.models.Product;
+
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
@@ -20,14 +23,11 @@ public class CartActivity extends AppCompatActivity {
 
         ListView lvCart = findViewById(R.id.lvCart);
         TextView tvTotal = findViewById(R.id.tvTotal);
-        
 
         List<Product> cartItems = CartManager.getInstance().getCartItems();
-        
 
         ProductAdapter adapter = new ProductAdapter(this, cartItems);
         lvCart.setAdapter(adapter);
-
 
         double total = CartManager.getInstance().getTotalPrice();
         tvTotal.setText("$" + String.format("%.2f", total));

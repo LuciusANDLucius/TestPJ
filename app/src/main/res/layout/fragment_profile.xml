@@ -3,54 +3,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#F5F5F5">
+    android:padding="24dp"
+    android:background="#FFFFFF">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Profile"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="32dp"/>
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:src="@android:drawable/ic_menu_myplaces"
-        android:background="@drawable/shape_input"
-        android:padding="16dp"/>
-
-    <TextView
-        android:id="@+id/tvUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User Name"
+        android:text="Thông tin cá nhân"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"/>
+        android:textColor="#333333"
+        android:layout_marginBottom="32dp"/>
 
-    <TextView
-        android:id="@+id/tvUserEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="user@example.com"
-        android:layout_gravity="center"
-        android:textColor="#888888"/>
-
-    <View
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#CCCCCC"
-        android:layout_marginVertical="24dp"/>
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
+
+        <TableRow android:paddingVertical="12dp">
+            <TextView android:text="ID" android:textStyle="bold" android:textSize="16sp" android:paddingEnd="20dp"/>
+            <TextView android:id="@+id/tvId" android:text="---" android:textSize="16sp"/>
+        </TableRow>
+        <View android:layout_height="1dp" android:background="#EEEEEE"/>
+
+        <TableRow android:paddingVertical="12dp">
+            <TextView android:text="First Name" android:textStyle="bold" android:textSize="16sp" android:paddingEnd="20dp"/>
+            <TextView android:id="@+id/tvFirstName" android:text="---" android:textSize="16sp"/>
+        </TableRow>
+        <View android:layout_height="1dp" android:background="#EEEEEE"/>
+
+        <TableRow android:paddingVertical="12dp">
+            <TextView android:text="Last Name" android:textStyle="bold" android:textSize="16sp" android:paddingEnd="20dp"/>
+            <TextView android:id="@+id/tvLastName" android:text="---" android:textSize="16sp"/>
+        </TableRow>
+        <View android:layout_height="1dp" android:background="#EEEEEE"/>
+
+        <TableRow android:paddingVertical="12dp">
+            <TextView android:text="Username" android:textStyle="bold" android:textSize="16sp" android:paddingEnd="20dp"/>
+            <TextView android:id="@+id/tvUsername" android:text="---" android:textSize="16sp"/>
+        </TableRow>
+        <View android:layout_height="1dp" android:background="#EEEEEE"/>
+
+        <TableRow android:paddingVertical="12dp">
+            <TextView android:text="Email" android:textStyle="bold" android:textSize="16sp" android:paddingEnd="20dp"/>
+            <TextView android:id="@+id/tvEmail" android:text="---" android:textSize="16sp"/>
+        </TableRow>
+    </TableLayout>
+
+    <Space android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
 
     <Button
-        android:id="@+id/btnChangePass"
+        android:id="@+id/btnLogout"
         android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="ĐĂNG XUẤT"
+        android:backgroundTint="#F44336"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change Password"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
 </LinearLayout>

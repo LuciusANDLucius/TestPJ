@@ -1,3 +1,30 @@
 <resources>
-    <string name="app_name">HITCApp</string>
+    <string name="app_name">HITC App</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="dont_have_account">Don\'t have an account? Register</string>
+    <string name="already_have_account">Already have an account? Login</string>
+    <string name="home">Home</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="total">Total</string>
+    <string name="payment">Payment</string>
+    <string name="update">Update</string>
+    <string name="change_password">Change Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="welcome">Welcome to HITC App</string>
+    <string name="get_started">Get Started</string>
+    <string name="order_success">Order placed successfully!</string>
+    <string name="price_format">$%1$.2f</string>
 </resources>

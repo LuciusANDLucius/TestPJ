@@ -30,11 +30,12 @@
             android:imeOptions="actionSearch"/>
     </androidx.cardview.widget.CardView>
 
-    <ListView
-        android:id="@+id/lvSearchResults"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearchResults"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"
-        android:divider="@null"/>
+        android:padding="4dp"
+        android:clipToPadding="false"/>
 
 </LinearLayout>
